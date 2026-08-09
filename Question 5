@@ -1,1 +1,82 @@
+import java.io.*;
+
+class EmployeeSalaryManagement
+{
+ public static void main(String args[]) throws IOException
+ {
+  BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+  int n,i,max=0,min=0;
+  int id[];
+  String name[];
+  double basic[],da[],hra[],pf[],gross[],net[];
+  double average=0;
+
+  System.out.print("Enter Number of Employees : ");
+  n=Integer.parseInt(br.readLine());
+
+  id=new int[n];
+  name=new String[n];
+  basic=new double[n];
+  da=new double[n];
+  hra=new double[n];
+  pf=new double[n];
+  gross=new double[n];
+  net=new double[n];
+
+  for(i=0;i<n;i++)
+  {
+   System.out.println("\nEmployee "+(i+1));
+
+   System.out.print("Enter Employee ID : ");
+   id[i]=Integer.parseInt(br.readLine());
+
+   System.out.print("Enter Employee Name : ");
+   name[i]=br.readLine();
+
+   System.out.print("Enter Basic Salary : ");
+   basic[i]=Double.parseDouble(br.readLine());
+
+   da[i]=basic[i]*0.40;
+   hra[i]=basic[i]*0.20;
+   pf[i]=basic[i]*0.12;
+
+   gross[i]=basic[i]+da[i]+hra[i];
+   net[i]=gross[i]-pf[i];
+
+   average=average+net[i];
+  }
+
+  for(i=1;i<n;i++)
+  {
+   if(net[i]>net[max])
+   {
+    max=i;
+   }
+
+   if(net[i]<net[min])
+   {
+    min=i;
+   }
+  }
+
+  average=average/n;
+
+  System.out.println("\nEmployee Details");
+  System.out.println("ID\tName\tBasic\tGross\tNet");
+
+  for(i=0;i<n;i++)
+  {
+   System.out.println(id[i]+"\t"+name[i]+"\t"+basic[i]+"\t"+gross[i]+"\t"+net[i]);
+  }
+
+  System.out.println("\nHighest Paid Employee : "+name[max]);
+  System.out.println("Salary : "+net[max]);
+
+  System.out.println("\nLowest Paid Employee : "+name[min]);
+  System.out.println("Salary : "+net[min]);
+
+  System.out.println("\nAverage Salary : "+average);
+ }
+}
 
